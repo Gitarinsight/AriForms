@@ -181,7 +181,7 @@
 <body dir="rtl">
 
     <div class="formcontent" id="formcontent">
-        <form id="content" action="" method="post">
+        <form id="content" action="generate_morakhasi_docx" method="post">
             <h1>فرم درخواست مرخصی</h1>
 
             <label for="fullName">نام و نام خانوادگی:</label>
@@ -193,7 +193,7 @@
                 <option value="Marcom">Marcom</option>
                 <option value="Growth">Growth</option>
                 <option value="Digital">Digital</option>
-                <option value="markMindeting">Mind</option>
+                <option value="Mind">Mind</option>
                 <option value="Control">Control</option>
                 <option value="Finance">Finance</option>
                 <option value="Innovation Center">Innovation Center</option>
@@ -202,10 +202,10 @@
             <h3>نوع مرخصی:</h3>
 
             <label for="dailyLeave">روزانه:</label>
-            <input type="radio" id="dailyLeave" name="leaveType" value="روزانه" onclick="showSection('dailySection')">
+            <input type="radio" id="dailyLeave" name="leaveType" value="daily" onclick="showSection('dailySection')">
 
             <label for="hourlyLeave">ساعتی:</label>
-            <input type="radio" id="hourlyLeave" name="leaveType" value="ساعتی" onclick="showSection('hourlySection')">
+            <input type="radio" id="hourlyLeave" name="leaveType" value="hourly" onclick="showSection('hourlySection')">
 
             <div id="freeSection" style="display:block">
                 <!-- Contents for daily leave -->
@@ -218,12 +218,12 @@
                 <div class="row">
                     <div class="col">
                         <label for="startDate">از تاریخ:</label>
-                        <input placeholder="dd/mm/yyyy" type="text" id="startDate" name="startDate" required>
+                        <input placeholder="dd/mm/yyyy" type="text" id="startDate" name="startDate">
                     </div>
 
                     <div class="col">
                         <label for="endDate">تا تاریخ:</label>
-                        <input placeholder="dd/mm/yyyy" type="text" id="endDate" name="endDate" required>
+                        <input placeholder="dd/mm/yyyy" type="text" id="endDate" name="endDate">
                     </div>
                 </div>
             </div>
@@ -236,26 +236,26 @@
                 <div class="row">
                     <div class="col">
                         <label for="Date">تاریخ:</label>
-                        <input placeholder="dd/mm/yyyy" type="text" id="Date" name="Date" required>
+                        <input placeholder="dd/mm/yyyy" type="text" id="Date" name="Date">
                     </div>
                     <div class="col">
                         <label for="startTime">از ساعت:</label>
-                        <input type="time" id="startTime" name="startTime" required>
+                        <input type="time" id="startTime" name="startTime">
                     </div>
 
                     <div class="col">
                         <label for="endTime">تا ساعت:</label>
-                        <input type="time" id="endTime" name="endTime" required>
+                        <input type="time" id="endTime" name="endTime">
                     </div>
                 </div>
             </div>
 
-            <input onclick="submitData()" id="generatePdf" type="submit" value="ثبت درخواست">
+            <input id="generatePdf" type="submit" value="ثبت درخواست">
             <input type="reset" value="بازگردانی فرم">
         </form>
     </div>
 
-    <div class="container" id="container">
+    <!-- <div class="container" id="container">
         <div class="header">درخواست مرخصی</div>
 
         <div class="person">درخواست دهنده</div>
@@ -274,36 +274,36 @@
                 </p>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <script>
         async function submitData() {
 
-            event.preventDefault();
+            // event.preventDefault();
             // Get form data
-            const fullName = document.getElementById('fullName').value;
-            const department = document.getElementById('department').value;
-            const leaveType = document.querySelector('input[name="leaveType"]:checked').value;
-            const duration = document.getElementById('duration').value;
-            const startDate = document.getElementById('startDate').value;
-            const endDate = document.getElementById('endDate').value;
-            const dailyDuration = document.getElementById('dailyDuration').value;
-            const Date = document.getElementById('Date').value;
-            const startTime = document.getElementById('startTime').value;
-            const endTime = document.getElementById('endTime').value;
+            // const fullName = document.getElementById('fullName').value;
+            // const department = document.getElementById('department').value;
+            // const leaveType = document.querySelector('input[name="leaveType"]:checked').value;
+            // const duration = document.getElementById('duration').value;
+            // const startDate = document.getElementById('startDate').value;
+            // const endDate = document.getElementById('endDate').value;
+            // const dailyDuration = document.getElementById('dailyDuration').value;
+            // const Date = document.getElementById('Date').value;
+            // const startTime = document.getElementById('startTime').value;
+            // const endTime = document.getElementById('endTime').value;
 
-            var jsonData = {
-                "fullName": fullName,
-                "department": department,
-                "leaveType": leaveType,
-                "duration": duration,
-                "startDate": startDate,
-                "endDate": endDate,
-                "dailyDuration": dailyDuration,
-                "Date": Date,
-                "startTime": startTime,
-                "endTime": endTime,
-            };
+            // var jsonData = {
+            //     "fullName": fullName,
+            //     "department": department,
+            //     "leaveType": leaveType,
+            //     "duration": duration,
+            //     "startDate": startDate,
+            //     "endDate": endDate,
+            //     "dailyDuration": dailyDuration,
+            //     "Date": Date,
+            //     "startTime": startTime,
+            //     "endTime": endTime,
+            // };
 
             // Send the JSON object to Flask using AJAX
             // var xhr = new XMLHttpRequest();
@@ -311,21 +311,21 @@
             // xhr.setRequestHeader("Content-Type", "application/json");
             // xhr.send(JSON.stringify(jsonData));
             // Construct the text to be displayed in the PDF
-            let text = `احتراما اینجانب  : ${fullName} شاغل در واحد: ${department}
-        درخواست مرخصی ${leaveType}`;
+        //     let text = `احتراما اینجانب  : ${fullName} شاغل در واحد: ${department}
+        // درخواست مرخصی ${leaveType}`;
 
-            if (leaveType === "روزانه") {
-                text += ` به مدت ${duration} روز، از تاریخ ${startDate} تا تاریخ ${endDate} را دارم.`;
-            } else if (leaveType === "ساعتی") {
-                text += ` به مدت ${dailyDuration} ساعت، در تاریخ: ${Date}, از ساعت ${startTime} تا ساعت ${endTime} را دارم.`;
-            }
+        //     if (leaveType === "روزانه") {
+        //         text += ` به مدت ${duration} روز، از تاریخ ${startDate} تا تاریخ ${endDate} را دارم.`;
+        //     } else if (leaveType === "ساعتی") {
+        //         text += ` به مدت ${dailyDuration} ساعت، در تاریخ: ${Date}, از ساعت ${startTime} تا ساعت ${endTime} را دارم.`;
+        //     }
             // alert(text)
 
-            document.getElementById("requesttext").innerText = text;
-            document.getElementById("formcontent").style.display = "none";
-            document.getElementById("container").style.display = "block";
+            // document.getElementById("requesttext").innerText = text;
+            // document.getElementById("formcontent").style.display = "none";
+            // document.getElementById("container").style.display = "block";
 
-            window.print();
+            // window.print();
             // const { PDFDocument, fetchAsset, StandardFonts } = PDFLib;
 
             // // Load a font that supports Persian characters
