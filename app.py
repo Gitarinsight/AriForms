@@ -3,9 +3,7 @@ from docx import Document
 from docxtpl import DocxTemplate
 from docx2pdf import convert
 from datetime import datetime
-import pythoncom
 import os
-import psutil
 
 app = Flask(__name__)
 
@@ -61,25 +59,10 @@ def generate_docx():
 
     # Convert DOCX to PDF
     pdf_file = filename + '.pdf'
-    convert_docx_to_pdf(output_full_path, pdf_file)
-
+    convert(output_full_path, pdf_file)
 
     # Send the generated document as a response
     return send_file(pdf_file, mimetype='application/pdf', as_attachment=True, download_name=filename)
-
-def convert_docx_to_pdf(docx_file, pdf_file):
-    try:
-        # Close any existing instances of Microsoft Word
-        for proc in psutil.process_iter():
-            if "WINWORD.EXE" in proc.name():
-                proc.kill()
-
-        pythoncom.CoInitializeEx(pythoncom.COINIT_APARTMENTTHREADED)
-        convert(docx_file, pdf_file)
-        return pdf_file
-    except Exception as e:
-        print(f'Error: {str(e)}')
-
 
 if __name__ == "__main__":
     app.run(debug=True)
